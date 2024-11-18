@@ -8,22 +8,29 @@ Assignment: 1
 // REMIDER : YOU CANT USE ANY CONTROL FLOW OPERATIONS OR FUNCTIONS, ONLY BITWISE.
 
 int main() {
+    // number and position variables that will be used throughout all the tasks
+    int number, position;
+
+    // variables for task 2 - number with bit on and number with bit off
+    int bitOn, bitOff;
+
+    // variables for task 5 that will represent two octal numbers, and bits in 3,5,7,11 positions
+    int octal1, octal2;
+    int bit3, bit5, bit7, bit11;
+
     // What bit
     printf("What bit:\n");
     /*Scan two integers (representing number and a position)
       Print the bit in this position. */
 
-    int number, position;
     printf("Please enter a number:\n");
     scanf("%d", &number);
-
     printf("Please enter a position:\n");
     scanf("%d", &position);
 
-    /* Shift right so the bit at the requested position becomes the LSB,
-     then, use mask &1 in order to get 0 if that bit is 0, or 1 otherwise. */
+    /* Shift the number to the right so the bit at the requested position becomes the LSB,
+       then, use mask &1 in order to get 0 if that bit is 0, or 1 otherwise. */
     int result = (number >> position) & 1;
-
     printf("The bit in position %d of number %d is: %d\n", position, number, result);
 
     // Set bit
@@ -33,67 +40,75 @@ int main() {
       Print the output
       Now make sure it's "off" (equal to 0)
       Print the output */
+
     printf("Please enter a number:\n");
     scanf("%d", &number);
-
     printf("Please enter a position:\n");
     scanf("%d", &position);
 
-      /* Take 1 and move its only bit that is equal to 1(the LSB) to the requested position
-      then, use OR with it and with the number, in order to switch on the number's bit in that position */
-    int bit_on = (1 << position) | number;
+    /* Take 1 and move its only bit that is equal to 1(the LSB) to the requested position
+       Then, use OR with it and with the number, in order to switch on the number's bit in that position */
+    bitOn = (1 << position) | number;
 
-        /* Take 1 and move its only bit that is equal to 1(the LSB) to the requested position.
-         * use NOT in order to flip all the bits and get all 1s and a 0 only in the requested position
-         * use AND with it and with the number, in order to get a 0 in the requested position and leave the rest of the number as it was.
-         */
+    /* Take 1 and move its only bit that is equal to 1(the LSB) to the requested position
+       Use NOT in order to flip all the bits and get all 1s and a 0 only in the requested position
+       Then, use AND with it and with the number, in order to get a 0 in the requested position */
+    bitOff = ~(1 << position) & number;
+    printf("Number with bit %d set to 1: %d\n", position, bitOn);
+    printf("Number with bit %d set to 0: %d\n", position, bitOff);
 
-    int bit_off = ~(1 << position) & number;
-    printf("Number with bit %d set to 1: %d\n", position, bit_on);
-    printf("Number with bit %d set to 0: %d\n", position, bit_off);
-
-
-      // Toggle bit
+    // Toggle bit
     printf("\nToggle bit:\n");
-      /*Scan two integers (representing number and a position)
+    /*Scan two integers (representing number and a position)
       Toggle the bit in this position
       Print the new number */
+
     printf("Please enter a number:\n");
     scanf("%d", &number);
-
     printf("Please enter a position:\n");
     scanf("%d", &position);
 
-        /* Take 1 and move its only bit that is equal to 1(the LSB) to the requested position
-         use XOR with it and with the number, in order to flip the requested bit and leave the rest as it was */
+    /* Take 1 and move its only bit that is equal to 1(the LSB) to the requested position
+       use XOR with it and with the number, in order to flip the requested bit and leave the rest as it was */
     int toggled = (1 << position) ^ number;
     printf("Number with bit %d toggled: %d\n", position, toggled);
 
-      // Even - Odd
+    // Even - Odd
     printf("\nEven - Odd:\n");
     /* Scan an integer
       If the number is even - print 1, else - print 0. */
+
     printf("Please enter a number:\n");
     scanf("%d", &number);
 
-      int isEven = (number ^ 1) & 1;
-      printf("%d\n", isEven);
+    /* Use XOR on the number and 1 in order to flip the LSB(that indicates if the number is even-0 or odd-1)
+       Then, use mask &1 in order to get 0 in every position except for the LSB,
+       in the LSB the bit will remain as it was (1 for even, 0 for odd) */
+    int isEven = (number ^ 1) & 1;
+    printf("%d\n", isEven);
 
-      // 3, 5, 7, 11
+    // 3, 5, 7, 11
     printf("\n3, 5, 7, 11:\n");
-      /* Scan two integers in octal base
+    /* Scan two integers in octal base
       sum them up and print the result in hexadecimal base
       Print only 4 bits, in positions: 3,5,7,11 in the result. */
-    int oct1, oct2;
+
     printf("Please enter the first number (octal):\n");
-    scanf("%o", &oct1);
-
+    scanf("%o", &octal1);
     printf("Please enter the second number (octal):\n");
-    scanf("%o", &oct2);
-    int sum = oct1 + oct2;
+    scanf("%o", &octal2);
 
+    int sum = octal1 + octal2;
+    /* Shift the number to the right so the bit at the requested position becomes the LSB,
+       then, use mask &1 in order to get 0 if that bit is 0, or 1 otherwise. */
+    bit3 = ((sum >> 3) & 1);
+    bit5 = ((sum >> 5) & 1);
+    bit7 = ((sum >> 7) & 1);
+    bit11 = ((sum >> 11) & 1);
+
+    /* Print the sum in hexadecimal base with capital letters, and then print the requested bits*/
     printf("The sum in hexadecimal: %X\n", sum);
-    printf("The 3,5,7,11 bits are: %d%d%d%d\n", ((sum>>3)&1), ((sum>>5)&1), ((sum>>7)&1), ((sum>>11)&1));
+    printf("The 3,5,7,11 bits are: %d%d%d%d\n", bit3, bit5, bit7, bit11);
 
     printf("Bye!\n");
 
