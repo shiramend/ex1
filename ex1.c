@@ -52,12 +52,12 @@ int main() {
     /* Take 1 and move its only bit that is equal to 1(the LSB) to the requested position
        Then, use OR with it and with the number, in order to switch on the number's bit in that position */
     bitOn = (1 << position) | number;
+    printf("Number with bit %d set to 1: %d\n", position, bitOn);
 
     /* Take 1 and move its only bit that is equal to 1(the LSB) to the requested position
        Use NOT in order to flip all the bits and get all 1s and a 0 only in the requested position
        Then, use AND with it and with the number, in order to get a 0 in the requested position */
     bitOff = ~(1 << position) & number;
-    printf("Number with bit %d set to 1: %d\n", position, bitOn);
     printf("Number with bit %d set to 0: %d\n", position, bitOff);
 
     // Toggle bit
@@ -102,15 +102,14 @@ int main() {
     scanf("%o", &octal2);
 
     sum = octal1 + octal2;
+    printf("The sum in hexadecimal: %X\n", sum);
+
     /* Shift the number to the right so the bit at the requested position becomes the LSB,
        then, use mask &1 in order to get 0 if that bit is 0, or 1 otherwise. */
     bit3 = ((sum >> 3) & 1);
     bit5 = ((sum >> 5) & 1);
     bit7 = ((sum >> 7) & 1);
     bit11 = ((sum >> 11) & 1);
-
-    /* Print the sum in hexadecimal base with capital letters, and then print the requested bits*/
-    printf("The sum in hexadecimal: %X\n", sum);
     printf("The 3,5,7,11 bits are: %d%d%d%d\n", bit3, bit5, bit7, bit11);
 
     printf("Bye!\n");
