@@ -8,7 +8,7 @@ Assignment: 1
 // REMIDER : YOU CANT USE ANY CONTROL FLOW OPERATIONS OR FUNCTIONS, ONLY BITWISE.
 
 int main() {
-    // number and position variables that will be used throughout all the tasks
+    // number and position variables that will be used throughout the tasks
     int number, position;
     // variable for task 1 - will represent the value of the bit in the requested position
     int bitInPosition;
