@@ -1,6 +1,6 @@
 /******************
 Name: Shira Mendelson
-ID: 327654992
+ID: 
 Assignment: 1
 *******************/
 #include <stdio.h>
